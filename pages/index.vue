@@ -1,10 +1,13 @@
 <template>
+  <Dashboard/>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
+<script>
+import Dashboard from '~/components/Dashboard.vue'
 
-export default Vue.extend({
-  name: 'IndexPage'
-})
+export default {
+  components: {
+    Dashboard
+  }
+}
 </script>
