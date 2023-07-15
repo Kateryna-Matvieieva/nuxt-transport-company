@@ -1,6 +1,12 @@
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
+  ssr: false,
+
+  publicRuntimeConfig: {
+    apiKey: process.env.API_KEY,
+    apiUrl: process.env.API_URL,
+  },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -42,13 +48,21 @@ export default {
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
     // https://go.nuxtjs.dev/content
-    '@nuxt/content'
+    '@nuxt/content',
+    '@nuxtjs/dotenv',
+    '@nuxtjs/proxy'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: '/'
+    baseURL: 'https://wmhfc6gsje.execute-api.eu-north-1.amazonaws.com/prod/api/',
+    proxy: true
+  },
+  proxy: {
+    '/api/': { 
+      target: process.env.API_URL || 'https://wmhfc6gsje.execute-api.eu-north-1.amazonaws.com/prod/api/', 
+      pathRewrite: {'^/api/': ''} 
+    }
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
