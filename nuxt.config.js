@@ -1,7 +1,13 @@
 export default {
   // Target: https://go.nuxtjs.dev/config-target
-  target: 'universal',
+  target: 'static',
   ssr: true,
+  router: {
+    base: '/nuxt-transport-company/'
+  },
+  nitro: {
+    preset: "aws-lambda",
+},
 
   publicRuntimeConfig: {
     apiKey: process.env.API_KEY,
@@ -61,7 +67,7 @@ export default {
 
   proxy: {
     '/api/': { target:
-      'https://wmhfc6gsje.execute-api.eu-north-1.amazonaws.com/dev/api/'
+      'https://wmhfc6gsje.execute-api.eu-north-1.amazonaws.com/prod/api/'
       // 'http://localhost:3000/dev/api/'
       , pathRewrite: {'^/api/': ''} }
   },
